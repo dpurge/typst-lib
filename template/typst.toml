@@ -1,0 +1,12 @@
+[package]
+name = ""
+version = "0.0.1"
+description = ""
+authors = ["D. Purge <https://github.com/dpurge>"]
+repository = "https://github.com/dpurge/typst-lib"
+entrypoint = "lib.typ"
+exclude = []
+compiler = "0.12.0"
+license = ""
+categories = []
+keywords = []
