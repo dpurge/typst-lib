@@ -1,12 +1,12 @@
 [package]
-name = "dpurge-template"
+name = "dpurge-langnote"
 version = "0.0.1"
-description = ""
+description = "Language learning notebook"
 authors = ["D. Purge <https://github.com/dpurge>"]
 repository = "https://github.com/dpurge/typst-lib"
 entrypoint = "lib.typ"
 exclude = []
 compiler = "0.12.0"
 license = "MIT"
-categories = []
-keywords = []
+categories = ["notebook"]
+keywords = ["language", "notebook"]
