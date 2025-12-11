@@ -10,7 +10,7 @@
   // header-font: "Roboto",
   it,
 ) = {
-  let lang_data = toml("lang.toml")
+  let lang_data = toml("translations.toml")
 
   let __version__ = if version == none {
     (
