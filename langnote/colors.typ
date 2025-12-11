@@ -1,0 +1,1 @@
+#let color-text = rgb("#131A28")

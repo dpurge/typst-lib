@@ -4,7 +4,9 @@ default-lang = "eng"
 [lang.eng]
 date = "Date"
 version = "Version"
+lesson = "Lesson"
 
 [lang.pol]
 date = "Data"
 version = "Wersja"
+lesson = "Lekcja"

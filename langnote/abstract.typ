@@ -1,0 +1,5 @@
+#let Abstract(
+  it
+) = {
+  it
+}
