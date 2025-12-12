@@ -2,7 +2,7 @@
 
 #let Vocabulary(
   title: "",
-  it,
+  it
 ) = {
   section-header("V", title)
 
@@ -82,12 +82,25 @@
     }
   }
   
-  columns(2, gutter: 12pt)[
-    #for v in vocabulary {
-      [#v.phrase]
-      [ -- ]
-      [#v.translation ]
-      [\ ]
+  // for v in vocabulary {
+  //   v.phrase
+  //   v.grammar
+  //   v.translation
+  //   [\ ]
+  //   if (v.transcription != none or v.notes != none) {
+  //     v.transcription
+  //     [#v.notes]
+  //     [\ ]
+  //   }
+  // }
+  
+  grid(
+    columns: (6fr, 2fr, 5fr, 11fr),
+    // rows: (auto, 16pt),
+    gutter: 5pt,
+
+    ..for v in vocabulary {
+      (v.phrase, v.grammar, v.transcription, v.translation + " " + v.notes)
     }
-  ]
+  )
 }

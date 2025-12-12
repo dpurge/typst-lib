@@ -1,7 +1,7 @@
-#import "@preview/linguify:0.4.2": lflib
+// #import "@preview/linguify:0.4.2": lflib
 
-#import "colors.typ": color-text
-#import "helpers.typ": to-string, section-header
+// #import "colors.typ": color-text
+// #import "helpers.typ": to-string, section-header
 
 #import "langnote.typ": LangNote
 #import "title-page.typ": TitlePage

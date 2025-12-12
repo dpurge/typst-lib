@@ -3,24 +3,15 @@
 #let LangNote(
   title: (:),
   author: (:),
-  language: "eng",
   version: none,
   paper-size: "a5",
-  text-font: ("Arial", "Tahoma"),
-  // header-font: "Roboto",
-  it,
+  native-lang: "eng",
+  native-script: "latn",
+  foreign-lang: none,
+  foreign-script: "latn",
+  it
 ) = {
-  let lang_data = toml("translations.toml")
-
-  let __version__ = if version == none {
-    (
-      datetime.today().display("[year]-[month]-[day]")
-    )
-  } else {
-    version
-  }
-
-  let __lang__ = "en"
+  // let __lang__ = "en"
 
   set document(
     title: title,
@@ -31,13 +22,15 @@
   )
 
   show: it => context {
+    let lesson-nr = counter("lesson-nr")
+    // let lesson-nr = counter("lesson-nr")
     let version2 = "test-version"
     it
   }
 
   set text(
-    font: text-font,
-    lang: __lang__,
+    font: ("Arial", "Tahoma"),
+    lang: "en",
     size: 12pt,
     fill: color-text,
     fallback: true,

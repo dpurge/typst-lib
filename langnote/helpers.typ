@@ -1,5 +1,7 @@
 #import "colors.typ": color-text
 
+#let translations = toml("translations.toml")
+
 #let to-string(it) = {
   if type(it) == str {
     it

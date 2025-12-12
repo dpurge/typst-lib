@@ -5,8 +5,10 @@ default-lang = "eng"
 date = "Date"
 version = "Version"
 lesson = "Lesson"
+exercise = "Exercise"
 
 [lang.pol]
 date = "Data"
 version = "Wersja"
 lesson = "Lekcja"
+exercise = "Ćwiczenie"
