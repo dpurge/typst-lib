@@ -3,12 +3,14 @@ default-lang = "eng"
 
 [lang.eng]
 date = "Date"
-version = "Version"
-lesson = "Lesson"
 exercise = "Exercise"
+lesson = "Lesson"
+table-of-contents = "Table of contents"
+version = "Version"
 
 [lang.pol]
 date = "Data"
-version = "Wersja"
-lesson = "Lekcja"
 exercise = "Ćwiczenie"
+lesson = "Lekcja"
+table-of-contents = "Spis treści"
+version = "Wersja"

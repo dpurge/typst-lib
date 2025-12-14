@@ -3,7 +3,9 @@
 #let translations = toml("translations.toml")
 
 #let to-string(it) = {
-  if type(it) == str {
+  if it == none {
+    ""
+  } else if type(it) == str {
     it
   } else if type(it) != content {
     str(it)
@@ -56,4 +58,50 @@
   }
 
   [== #title]
+}
+
+#let dialog-body(it) = {
+  
+  let dialog = ()
+
+  for i in it.children {
+    if type(i) == content and repr(i.func()) == "item" {
+      let d = (
+        head: none,
+        body: none,
+      )
+
+      let state = "head"
+      for j in i.body.children {
+        if j.has("text") {
+          let t = j.text
+          if state == "head" {
+            if t == ":" {
+              state = "separator"
+              continue
+            } else if t == "-" and d.head == none {
+              j = [--]
+            }
+          }
+          if state == "separator" {
+            state = "body"
+          }
+        }
+
+        if state == "head" {
+          d.head = d.head + j
+        } else if state == "separator" {
+        } else {
+          d.body = d.body + j
+        }
+      }
+
+      dialog.push(d)
+    }
+  }
+
+  // repr(dialog)
+  for d in dialog {
+    [/ #d.head: #d.body]
+  }
 }
