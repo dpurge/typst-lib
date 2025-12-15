@@ -1,19 +1,27 @@
+#import "langnote.typ": (
+  config-author,
+  config-version,
+  config-native-script,
+)
+
 
 #let TitlePage(
-) = {
+) = context {
   set align(center)
+  set page(numbering: none)
 
   show title: smallcaps
   show title: set text(size: 20pt)
-  // show title: set align(center)
   show title: set block(below: 1.2em)
 
   title()
 
-  // author()
+  config-author.get()
+  linebreak()
 
-  // [version2]
+  [#config-version.get()]
 
-  // pagebreak()
-  // pagebreak()
+  pagebreak()
+  pagebreak()
+  counter(page).update(1)
 }

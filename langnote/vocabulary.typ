@@ -1,10 +1,30 @@
-#import "helpers.typ": to-string, section-header
+#import "langnote.typ": (
+  config-native-script,
+  config-native-lang,
+)
+
+#import "helpers.typ": (
+  to-string,
+  cfg-text,
+  section-marker,
+)
 
 #let Vocabulary(
   title: "",
   it
-) = {
-  section-header("V", title)
+) = context {
+  section-marker[V]
+  {
+    set text(
+      ..cfg-text(
+        "section-title",
+        config-native-script.get(),
+        config-native-lang.get()
+      ),
+    )
+
+    heading(level: 2)[#title]
+  }
 
   let vocabulary = ()
 
@@ -83,18 +103,7 @@
       }
     }
     
-    // for v in vocabulary {
-    //   v.phrase
-    //   v.grammar
-    //   v.translation
-    //   [\ ]
-    //   if (v.transcription != none or v.notes != none) {
-    //     v.transcription
-    //     [#v.notes]
-    //     [\ ]
-    //   }
-    // }
-    
+    v(1em, weak: true)
     grid(
       // columns: (5fr, 1fr, 6fr, 12fr),
       columns: (6fr, 6fr, 12fr),

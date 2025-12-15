@@ -20,45 +20,138 @@
   }
 }
 
-#let section-header(marker, title) = {
-  show heading.where(level: 2): it => {
-      v(2em, weak: true)
-      block(below: 1em)[
-        #place(dx:-3mm-2em, dy:-3.5pt)[
-          #box(width: 2em)[
-            #context {
-              align(right)[
-                #box(
-                  fill: color-text,
-                  width: 1em,
-                  height: 1em
-                )[
-                  #align(center+horizon,
-                    text(
-                      // font: sans,
-                      // weight: sans-weight,
-                      // size: heading-size,
-                      fill: rgb("#fbfbfd"),
-                      marker
-                    )
-                  )
-                ]
-              ]
-            }
-          ]
-        ]
+// #let test-it(it) = {
+//   repr(it)
+// }
 
-        #text(
-          // font: sans,
-          // weight: sans-weight,
-          // size: heading-size,
-          it.body
-        )
-      ]
+#let to-lang(it) = {
+  let lang-code = none
+  
+  if it == "arb" {
+    lang-code = "ar"
+  } else if it == "zho" {
+    lang-code = "zh"
+  } else if it == "eng" {
+    lang-code = "en"
+  } else if it == "pol" {
+    lang-code = "pl"
+  } else if it == "tur" {
+    lang-code = "tr"
+  } else {
+    panic("(to-lang) Unsupported language: " + str(it))
+  }
+  
+  lang-code
+}
+
+#let cfg-text(scope, script, lang) = {
+  let cfg = (
+    font: ("Arial", "Tahoma"),
+    lang: to-lang(lang),
+    size: 12pt,
+    fill: color-text,
+    dir: ltr,
+  )
+
+  if script == "latn" {
+    if scope == "langnote-body" {
+    } else if scope == "lesson-title" {
+      cfg.size = 24pt
+    } else if scope == "lesson-body" {
+    } else if scope == "lesson-date" {
+      cfg.size = 10pt
+    } else if scope == "abstract-body" {
+    } else if scope == "section-title" {
+    } else if scope == "section-body" {
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else if script == "cyrl" {
+    if scope == "section-title" {
+    } else if scope == "section-body" {
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else if script == "arab" {
+    cfg.font = ("Amiri")
+    cfg.dir = rtl
+    if scope == "section-title" {
+      cfg.size = 16pt
+    } else if scope == "section-body" {
+      cfg.size = 14pt
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else if script == "hans" {
+    if scope == "section-title" {
+    } else if scope == "section-body" {
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else if script == "hant" {
+    if scope == "section-title" {
+    } else if scope == "section-body" {
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else if script == "grek" {
+    if scope == "section-title" {
+    } else if scope == "section-body" {
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else if script == "deva" {
+    if scope == "section-title" {
+    } else if scope == "section-body" {
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else if script == "hebr" {
+    cfg.dir = rtl
+    if scope == "section-title" {
+    } else if scope == "section-body" {
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else {
+    panic("(cfg-text) Unsupported script: " + str(script))
   }
 
-  [== #title]
+  // if lang == "pol" {
+  // } else {
+  //   panic("(cfg-text) Unsupported language: " + str(lang))
+  // }
+  
+  cfg
 }
+
+#let section-marker(it) = {
+  v(2em, weak: true)
+  place(
+    dx:-3mm-2em,
+    dy:-1pt,
+  )[
+    #box(width: 2em)[
+      #align(top+right)[
+        #box(
+          fill: black,
+          width: 1em,
+          height: 1em
+        )[
+          #align(center+horizon,
+            text(
+              fill: white,
+              font: ("Arial", "Tahoma"),
+              size: 12pt,
+              strong(it)
+            )
+          )
+        ]
+      ]
+    ]
+  ]
+}
+
 
 #let dialog-body(it) = {
   

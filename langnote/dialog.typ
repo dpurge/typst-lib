@@ -1,20 +1,37 @@
-#import "helpers.typ": section-header, dialog-body
+#import "langnote.typ": (
+  config-foreign-script,
+  config-foreign-lang,
+)
+
+#import "helpers.typ": (
+  section-marker,
+  cfg-text,
+  dialog-body,
+)
 
 #let Dialog(
-  title: str,
+  title: none,
   it
-) = {
-  section-header("D", title)
+) = context {
+  section-marker[D]
+  {
+    set text(
+      ..cfg-text(
+        "section-title",
+        config-foreign-script.get(),
+        config-foreign-lang.get()
+      ),
+    )
+
+    heading(level: 2, )[#title]
+  }
+
   set terms(
     separator: h(1em),
     hanging-indent: 4em,
     spacing: 1em,
   )
-  // set par.line(
-  //   numbering: i => if calc.rem(i, 5) == 0 { i },
-  //   number-margin: right,
-  // )
-  // block(stroke: (left: 4pt), inset: 1em)[
+  v(1em, weak: true)
   block[
     #dialog-body(it)
   ]

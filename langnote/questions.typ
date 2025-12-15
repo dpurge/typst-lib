@@ -1,9 +1,9 @@
-#import "helpers.typ": section-header
+#import "helpers.typ": section-marker
 
 #let Questions(
   title: "",
   it,
 ) = {
-  section-header("Q", title)
+  // section-header("Q", title)
   it
 }
