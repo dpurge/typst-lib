@@ -1,0 +1,6 @@
+#let config-author = state("config-author")
+#let config-version = state("config-version")
+#let config-native-script = state("config-native-script")
+#let config-foreign-script = state("config-foreign-script")
+#let config-native-lang = state("config-native-lang")
+#let config-foreign-lang = state("config-foreign-lang")

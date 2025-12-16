@@ -1,4 +1,4 @@
-#import "langnote.typ": (
+#import "config.typ": (
   config-foreign-script,
   config-foreign-lang,
 )
@@ -24,4 +24,5 @@
 
     heading(level: 2)[#title]
   }
+  it
 }

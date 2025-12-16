@@ -1,4 +1,6 @@
-#import "langnote.typ": (
+#import "config.typ": (
+  config-foreign-script,
+  config-foreign-lang,
   config-native-script,
   config-native-lang,
 )
@@ -7,6 +9,7 @@
   to-string,
   cfg-text,
   section-marker,
+  render-vocabulary-body,
 )
 
 #let Vocabulary(
@@ -104,20 +107,6 @@
     }
     
     v(1em, weak: true)
-    grid(
-      // columns: (5fr, 1fr, 6fr, 12fr),
-      columns: (6fr, 6fr, 12fr),
-      // rows: (auto, 16pt),
-      gutter: 5pt,
-
-      ..for v in vocabulary {
-        (
-          v.phrase,
-          // v.grammar,
-          v.transcription,
-          v.translation + " " + v.notes
-        )
-      }
-    )
+    render-vocabulary-body(vocabulary)
   }
 }

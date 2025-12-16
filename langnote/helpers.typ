@@ -1,3 +1,8 @@
+#import "config.typ": (
+  config-foreign-script,
+  config-foreign-lang,
+)
+
 #import "colors.typ": color-text
 
 #let translations = toml("translations.toml")
@@ -29,7 +34,7 @@
   
   if it == "arb" {
     lang-code = "ar"
-  } else if it == "zho" {
+  } else if it == "cmn" {
     lang-code = "zh"
   } else if it == "eng" {
     lang-code = "en"
@@ -89,8 +94,11 @@
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
   } else if script == "hant" {
+      cfg.font = ("FangSong")
     if scope == "section-title" {
+      cfg.size = 16pt
     } else if scope == "section-body" {
+      cfg.size = 14pt
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
@@ -153,7 +161,7 @@
 }
 
 
-#let dialog-body(it) = {
+#let render-dialog-body(it) = {
   
   let dialog = ()
 
@@ -197,4 +205,40 @@
   for d in dialog {
     [/ #d.head: #d.body]
   }
+}
+
+#let render-phrase(it) = {
+  set text(
+    ..cfg-text(
+      "section-body",
+      config-foreign-script.get(),
+      config-foreign-lang.get()
+    ),
+  )
+  it
+}
+
+#let render-transcription(it) = {
+  it
+}
+
+#let render-grammar(it) = {
+  it
+}
+
+#let render-vocabulary-body(
+  it
+) = {
+  grid(
+    columns: (6fr, 6fr, 12fr),
+    gutter: 5pt,
+
+    ..for v in it {
+      (
+        render-phrase(v.phrase),
+        render-transcription(v.transcription),
+        v.translation + if v.notes != "" { " (" + v.notes + ")" }
+      )
+    }
+  )
 }

@@ -1,4 +1,4 @@
-#import "langnote.typ": (
+#import "config.typ": (
   config-foreign-script,
   config-foreign-lang,
 )

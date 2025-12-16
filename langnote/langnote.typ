@@ -1,15 +1,14 @@
 #import "colors.typ": color-text
 #import "helpers.typ": cfg-text
 
-#let config-author = state("config-author")
-#let config-version = state("config-version")
-#let config-native-script = state("config-native-script")
-#let config-foreign-script = state("config-foreign-script")
-#let config-native-lang = state("config-native-lang")
-#let config-foreign-lang = state("config-foreign-lang")
-
-#let counter-lesson = counter("counter-lesson")
-// #let counter-exercise = counter("counter-exercise")
+#import "config.typ": (
+  config-author,
+  config-version,
+  config-native-lang,
+  config-native-script,
+  config-foreign-lang,
+  config-foreign-script,
+)
 
 #let LangNote(
   title: (:),
@@ -37,11 +36,6 @@
   config-foreign-script.update(foreign-script)
   config-native-lang.update(native-lang)
   config-foreign-lang.update(foreign-lang)
-
-  // show: it => context {
-  //   let lesson-nr = counter("lesson-nr")
-  //   it
-  // }
 
   set text(
     ..cfg-text("langnote-body", native-script, native-lang),

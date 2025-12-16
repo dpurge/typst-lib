@@ -1,4 +1,4 @@
-#import "langnote.typ": (
+#import "config.typ": (
   config-foreign-script,
   config-foreign-lang,
 )
@@ -6,7 +6,7 @@
 #import "helpers.typ": (
   section-marker,
   cfg-text,
-  dialog-body,
+  render-dialog-body,
 )
 
 #let Dialog(
@@ -33,6 +33,6 @@
   )
   v(1em, weak: true)
   block[
-    #dialog-body(it)
+    #render-dialog-body(it)
   ]
 }

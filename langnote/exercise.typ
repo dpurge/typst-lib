@@ -1,6 +1,6 @@
-#import "@preview/linguify:0.4.2": lflib
+#import "requirements.typ": linguify.lflib
 
-#import "langnote.typ": (
+#import "config.typ": (
   config-foreign-script,
   config-foreign-lang,
 )

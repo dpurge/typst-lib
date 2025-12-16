@@ -1,4 +1,4 @@
-#import "@preview/linguify:0.4.2": lflib
+#import "requirements.typ": linguify.lflib
 
 #import "helpers.typ": translations
 

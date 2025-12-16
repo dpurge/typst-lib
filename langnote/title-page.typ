@@ -1,4 +1,4 @@
-#import "langnote.typ": (
+#import "config.typ": (
   config-author,
   config-version,
   config-native-script,

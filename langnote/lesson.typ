@@ -1,6 +1,6 @@
 #import "@preview/linguify:0.4.2": lflib
 
-#import "langnote.typ": (
+#import "config.typ": (
   config-native-script,
   config-native-lang,
 )
