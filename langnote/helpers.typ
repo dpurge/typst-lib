@@ -177,23 +177,27 @@
         if j.has("text") {
           let t = j.text
           if state == "head" {
-            if t == ":" {
+            if t.ends-with(":") {
               state = "separator"
-              continue
+              t = t.trim(":", at: end)
+              j = if t == "" { none } else { t }
+            } else if t.ends-with("：") {
+              state = "separator"
+              j = t.trim("：", at: end)
             } else if t == "-" and d.head == none {
               j = [--]
             }
           }
-          if state == "separator" {
-            state = "body"
-          }
         }
 
-        if state == "head" {
+        if state == "head" or state == "separator" {
           d.head = d.head + j
-        } else if state == "separator" {
         } else {
           d.body = d.body + j
+        }
+
+        if state == "separator" {
+          state = "body"
         }
       }
 
@@ -202,6 +206,13 @@
   }
 
   // repr(dialog)
+  set text(
+    ..cfg-text(
+      "section-body",
+      config-foreign-script.get(),
+      config-foreign-lang.get()
+    ),
+  )
   for d in dialog {
     [/ #d.head: #d.body]
   }
