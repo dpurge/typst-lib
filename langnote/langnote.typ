@@ -58,5 +58,15 @@
     justify: true,
   )
 
+  set par.line(
+    numbering: i => if calc.rem(i, 5) == 0 {
+      text(..cfg-text("line-number", native-script, native-lang))[
+        #i
+      ]
+    },
+    numbering-scope: "page",
+    number-margin: right,
+  )
+
   it
 }

@@ -15,21 +15,23 @@
   number: str,
   it,
 ) = context {
-  section-marker[E]
-  {
-    set text(
-      ..cfg-text(
-        "section-title",
-        config-foreign-script.get(),
-        config-foreign-lang.get()
-      ),
-    )
+  box[
+    #section-marker[E]
+    #{
+      set text(
+        ..cfg-text(
+          "section-title",
+          config-foreign-script.get(),
+          config-foreign-lang.get()
+        ),
+      )
 
-    heading(level: 2)[
-      #lflib._linguify("exercise",
-        lang: "pol",
-        from: translations,
-      ).ok #number ]
-  }
+      heading(level: 2)[
+        #lflib._linguify("exercise",
+          lang: "pol",
+          from: translations,
+        ).ok #number ]
+    }
+  ]
   it
 }

@@ -16,18 +16,20 @@
   title: "",
   it
 ) = context {
-  section-marker[V]
-  {
-    set text(
-      ..cfg-text(
-        "section-title",
-        config-native-script.get(),
-        config-native-lang.get()
-      ),
-    )
+  block[
+    #section-marker[V]
+    #{
+      set text(
+        ..cfg-text(
+          "section-title",
+          config-native-script.get(),
+          config-native-lang.get()
+        ),
+      )
 
-    heading(level: 2)[#title]
-  }
+      heading(level: 2)[#title]
+    }
+  ]
 
   let vocabulary = ()
 

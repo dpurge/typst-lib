@@ -40,6 +40,8 @@
     lang-code = "en"
   } else if it == "pol" {
     lang-code = "pl"
+  } else if it == "kor" {
+    lang-code = "ko"
   } else if it == "tur" {
     lang-code = "tr"
   } else {
@@ -68,6 +70,9 @@
     } else if scope == "abstract-body" {
     } else if scope == "section-title" {
     } else if scope == "section-body" {
+    } else if scope == "line-number" {
+      cfg.fill = gray
+      cfg.size = 8pt
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
@@ -94,11 +99,19 @@
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
   } else if script == "hant" {
-      cfg.font = ("FangSong")
+      // cfg.font = ("FangSong")
+      cfg.font = ("KaiTi")
     if scope == "section-title" {
       cfg.size = 16pt
     } else if scope == "section-body" {
       cfg.size = 14pt
+    } else {
+      panic("(cfg-text) Unsupported scope: " + str(scope))
+    }
+  } else if script == "kore" {
+    cfg.font = ("Noto serif")
+    if scope == "section-title" {
+    } else if scope == "section-body" {
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }

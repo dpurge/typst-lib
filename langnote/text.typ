@@ -9,25 +9,26 @@
   title: "",
   it
 ) = context {
+  block[
+    #section-marker[T]
+    #{
+      set text(
+        ..cfg-text(
+          "section-title",
+          config-foreign-script.get(),
+          config-foreign-lang.get()
+        ),
+      )
 
-  section-marker[T]
-  {
-    set text(
-      ..cfg-text(
-        "section-title",
-        config-foreign-script.get(),
-        config-foreign-lang.get()
-      ),
-    )
+      heading(level: 2)[#title]
+    }
+  ]
 
-    heading(level: 2)[#title]
-  }
-
-  set par.line(
-    numbering: i => if calc.rem(i, 5) == 0 { i },
-    numbering-scope: "page",
-    number-margin: right,
-  )
+  // set par.line(
+  //   numbering: i => if calc.rem(i, 5) == 0 { i },
+  //   numbering-scope: "page",
+  //   number-margin: right,
+  // )
 
   {
     set text(

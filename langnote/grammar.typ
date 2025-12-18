@@ -12,18 +12,20 @@
   title: str,
   it
 ) = context {
-  section-marker[G]
-  {
-    set text(
-      ..cfg-text(
-        "section-title",
-        config-foreign-script.get(),
-        config-foreign-lang.get()
-      ),
-    )
+  box[
+    #section-marker[G]
+    #{
+      set text(
+        ..cfg-text(
+          "section-title",
+          config-foreign-script.get(),
+          config-foreign-lang.get()
+        ),
+      )
 
-    heading(level: 2)[#title]
-  }
+      heading(level: 2)[#title]
+    }
+  ]
   v(1em, weak: true)
   it
 }
