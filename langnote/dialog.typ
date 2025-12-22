@@ -24,7 +24,11 @@
         ),
       )
 
-      heading(level: 2, )[#title]
+      heading(
+        level: 2,
+      )[
+        #title
+      ]
     }
   ]
 
@@ -35,7 +39,5 @@
   )
   
   v(1em, weak: true)
-  block[
-    #render-dialog-body(it)
-  ]
+  render-dialog-body(it)
 }

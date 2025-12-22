@@ -1,6 +1,7 @@
 #import "config.typ": (
   config-foreign-script,
   config-foreign-lang,
+  config-native-lang,
 )
 
 #import "colors.typ": color-text
@@ -36,6 +37,8 @@
     lang-code = "ar"
   } else if it == "cmn" {
     lang-code = "zh"
+  } else if it == "fas" {
+    lang-code = "fa"
   } else if it == "eng" {
     lang-code = "en"
   } else if it == "pol" {
@@ -70,6 +73,11 @@
     } else if scope == "abstract-body" {
     } else if scope == "section-title" {
     } else if scope == "section-body" {
+    // } else if scope == "vocabulary-phrase" {
+    } else if scope == "vocabulary-transcription" {
+      cfg.font = "Andika"
+      cfg.style = "italic"
+    // } else if scope == "vocabulary-translation" {
     } else if scope == "line-number" {
       cfg.fill = gray
       cfg.size = 8pt
@@ -218,7 +226,6 @@
     }
   }
 
-  // repr(dialog)
   set text(
     ..cfg-text(
       "section-body",
@@ -226,6 +233,7 @@
       config-foreign-lang.get()
     ),
   )
+
   for d in dialog {
     [/ #d.head: #d.body]
   }
@@ -239,15 +247,36 @@
       config-foreign-lang.get()
     ),
   )
-  it
+  it.phrase
 }
 
 #let render-transcription(it) = {
-  it
+  set text(
+    ..cfg-text(
+      "vocabulary-transcription",
+      "latn",
+      config-native-lang.get()
+    ),
+  )
+  it.transcription
 }
 
 #let render-grammar(it) = {
   it
+}
+
+#let render-translation(it) = {
+  if it.translation != "" {
+    it.translation
+  }
+  if it.translation != "" and it.notes != "" {
+    " "
+  }
+  if it.notes != "" {
+    "("
+    it.notes
+    ")"
+  }
 }
 
 #let render-vocabulary-body(
@@ -259,9 +288,9 @@
 
     ..for v in it {
       (
-        render-phrase(v.phrase),
-        render-transcription(v.transcription),
-        v.translation + if v.notes != "" { " (" + v.notes + ")" }
+        render-phrase(v),
+        render-transcription(v),
+        render-translation(v),
       )
     }
   )

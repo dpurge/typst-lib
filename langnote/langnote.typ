@@ -58,11 +58,25 @@
     justify: true,
   )
 
+  // set text(..cfg-text("line-number", native-script, native-lang))
+
+  // set par.line(
+  //   numbering: i => if calc.rem(i, 5) == 0 {
+  //     text(..cfg-text("line-number", native-script, native-lang))[
+  //       #i
+  //     ]
+  //   } else {
+  //     none
+  //   },
+  //   numbering-scope: "page",
+  //   number-margin: right,
+  // )
+
   set par.line(
-    numbering: i => if calc.rem(i, 5) == 0 {
-      text(..cfg-text("line-number", native-script, native-lang))[
-        #i
-      ]
+    numbering: i => {
+      text(
+        ..cfg-text("line-number", native-script, native-lang)
+      )[#i]
     },
     numbering-scope: "page",
     number-margin: right,
