@@ -1,6 +1,7 @@
 #import "config.typ": (
   config-foreign-script,
   config-foreign-lang,
+  config-native-script,
   config-native-lang,
 )
 
@@ -73,23 +74,25 @@
     } else if scope == "abstract-body" {
     } else if scope == "section-title" {
     } else if scope == "section-body" {
-    // } else if scope == "vocabulary-phrase" {
+    } else if scope == "vocabulary-phrase" {
     } else if scope == "vocabulary-transcription" {
-      cfg.font = "Andika"
+      cfg.font = ("Andika")
       cfg.style = "italic"
-    // } else if scope == "vocabulary-translation" {
+    } else if scope == "vocabulary-translation" {
     } else if scope == "line-number" {
       cfg.fill = gray
       cfg.size = 8pt
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else if script == "cyrl" {
     if scope == "section-title" {
     } else if scope == "section-body" {
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else if script == "arab" {
     cfg.font = ("Amiri")
     cfg.dir = rtl
@@ -97,15 +100,19 @@
       cfg.size = 16pt
     } else if scope == "section-body" {
       cfg.size = 14pt
+    } else if scope == "vocabulary-phrase" {
+      cfg.size = 14pt
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else if script == "hans" {
     if scope == "section-title" {
     } else if scope == "section-body" {
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else if script == "hant" {
       // cfg.font = ("FangSong")
       cfg.font = ("KaiTi")
@@ -113,28 +120,38 @@
       cfg.size = 16pt
     } else if scope == "section-body" {
       cfg.size = 14pt
+    } else if scope == "vocabulary-phrase" {
+      cfg.size = 14pt
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else if script == "kore" {
     cfg.font = ("Noto serif")
     if scope == "section-title" {
+      cfg.size = 15pt
     } else if scope == "section-body" {
+      cfg.size = 13pt
+    } else if scope == "vocabulary-phrase" {
+      cfg.size = 13pt
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else if script == "grek" {
     if scope == "section-title" {
     } else if scope == "section-body" {
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else if script == "deva" {
     if scope == "section-title" {
     } else if scope == "section-body" {
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else if script == "hebr" {
     cfg.dir = rtl
     if scope == "section-title" {
@@ -142,6 +159,7 @@
     } else {
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
+
   } else {
     panic("(cfg-text) Unsupported script: " + str(script))
   }
@@ -239,33 +257,19 @@
   }
 }
 
-#let render-phrase(it) = {
-  set text(
-    ..cfg-text(
-      "section-body",
-      config-foreign-script.get(),
-      config-foreign-lang.get()
-    ),
-  )
+#let get-vocabulary-phrase(it) = {
   it.phrase
 }
 
-#let render-transcription(it) = {
-  set text(
-    ..cfg-text(
-      "vocabulary-transcription",
-      "latn",
-      config-native-lang.get()
-    ),
-  )
+#let get-vocabulary-transcription(it) = {
   it.transcription
 }
 
-#let render-grammar(it) = {
-  it
+#let get-vocabulary-grammar(it) = {
+  it.grammar
 }
 
-#let render-translation(it) = {
+#let get-vocabulary-translation(it) = {
   if it.translation != "" {
     it.translation
   }
@@ -282,16 +286,90 @@
 #let render-vocabulary-body(
   it
 ) = {
+
+  // defaults
+  let columns = (12fr, 12fr)
+  let phrase-column = 0
+  let translation-column = 1
+  let transcription-column = none
+
+  let native-lang = config-native-lang.get()
+  let native-script = config-native-script.get()
+
+  // language setup
+  let lang = config-foreign-lang.get()
+  let script = config-foreign-script.get()
+
+  if lang == "arb" {
+    columns = (6fr, 7fr, 11fr)
+    transcription-column = 1
+    translation-column = 2
+  } else if lang == "cmn" {
+    columns = (6fr, 6fr, 12fr)
+    transcription-column = 1
+    translation-column = 2
+  } else if lang == "fas" {
+    columns = (6fr, 6fr, 12fr)
+    transcription-column = 1
+    translation-column = 2
+  }
+
+  // styling
+  show grid: it => {
+
+    show grid.cell.where(x: phrase-column): it => {
+      set text(
+        ..cfg-text(
+          "vocabulary-phrase",
+          script,
+          lang
+        ),
+      )
+      it
+    }
+
+    // if transcription-column != none {
+      show grid.cell.where(x: transcription-column): it => {
+        set text(
+          ..cfg-text(
+            "vocabulary-transcription",
+            native-script,
+            lang
+          )
+        )
+        it
+      }
+    // }
+    
+    show grid.cell.where(x: translation-column): it => {
+      set text(
+        ..cfg-text(
+          "vocabulary-translation",
+          native-script,
+          native-lang
+        )
+      )
+      it
+    }
+    it
+  }
+  
   grid(
-    columns: (6fr, 6fr, 12fr),
-    gutter: 5pt,
+    columns: columns,
+    gutter: 1em,
 
     ..for v in it {
-      (
-        render-phrase(v),
-        render-transcription(v),
-        render-translation(v),
-      )
+      let row = ()
+      for i in range(3) {
+        if i == phrase-column {
+          row.push(get-vocabulary-phrase(v))
+        } else if i == translation-column {
+          row.push(get-vocabulary-translation(v))
+        } else if i == transcription-column {
+          row.push(get-vocabulary-transcription(v))
+        }
+      }
+      row
     }
   )
 }

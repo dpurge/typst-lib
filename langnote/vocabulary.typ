@@ -16,9 +16,10 @@
   title: "",
   it
 ) = context {
-  block[
-    #section-marker[V]
-    #{
+  section-marker[V]
+  // block[
+    // #section-marker[V]
+    {
       set text(
         ..cfg-text(
           "section-title",
@@ -29,7 +30,7 @@
 
       heading(level: 2)[#title]
     }
-  ]
+  // ]
 
   let vocabulary = ()
 

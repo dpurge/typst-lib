@@ -13,24 +13,21 @@
   title: none,
   it
 ) = context {
-  block[
-    #section-marker[D]
-    #{
-      set text(
-        ..cfg-text(
-          "section-title",
-          config-foreign-script.get(),
-          config-foreign-lang.get()
-        ),
-      )
-
-      heading(
-        level: 2,
-      )[
-        #title
-      ]
-    }
-  ]
+  section-marker[D]
+  {
+    set text(
+      ..cfg-text(
+        "section-title",
+        config-foreign-script.get(),
+        config-foreign-lang.get()
+      ),
+    )
+    heading(
+      level: 2,
+    )[
+      #title
+    ]
+  }
 
   set terms(
     separator: h(1em),

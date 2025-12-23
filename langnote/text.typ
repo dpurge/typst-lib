@@ -9,9 +9,9 @@
   title: "",
   it
 ) = context {
-  block[
-    #section-marker[T]
-    #{
+  section-marker[T]
+  // block[
+    {
       set text(
         ..cfg-text(
           "section-title",
@@ -22,13 +22,7 @@
 
       heading(level: 2)[#title]
     }
-  ]
-
-  // set par.line(
-  //   numbering: i => if calc.rem(i, 5) == 0 { i },
-  //   numbering-scope: "page",
-  //   number-margin: right,
-  // )
+  // ]
 
   {
     set text(
@@ -37,6 +31,9 @@
         config-foreign-script.get(),
         config-foreign-lang.get()
       ),
+    )
+    set par(
+      leading: 1em
     )
     v(1em, weak: true)
     it
