@@ -106,14 +106,14 @@
       panic("(cfg-text) Unsupported scope: " + str(scope))
     }
 
-  } else if script == "hans" {
-    if scope == "section-title" {
-    } else if scope == "section-body" {
-    } else {
-      panic("(cfg-text) Unsupported scope: " + str(scope))
-    }
+  // } else if script == "hans" {
+  //   if scope == "section-title" {
+  //   } else if scope == "section-body" {
+  //   } else {
+  //     panic("(cfg-text) Unsupported scope: " + str(scope))
+  //   }
 
-  } else if script == "hant" {
+  } else if script == "hant" or script == "hans" {
       // cfg.font = ("FangSong")
       cfg.font = ("KaiTi")
     if scope == "section-title" {
