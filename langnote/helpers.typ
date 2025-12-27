@@ -40,6 +40,8 @@
     lang-code = "zh"
   } else if it == "fas" {
     lang-code = "fa"
+  } else if it == "fra" {
+    lang-code = "fr"
   } else if it == "eng" {
     lang-code = "en"
   } else if it == "pol" {
@@ -223,6 +225,9 @@
             } else if t.ends-with("：") {
               state = "separator"
               j = t.trim("：", at: end)
+            } else if t.ends-with("︰") {
+              state = "separator"
+              j = t.trim("︰", at: end)
             } else if t == "-" and d.head == none {
               j = [--]
             }
