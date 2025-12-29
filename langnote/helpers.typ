@@ -34,10 +34,12 @@
 #let to-lang(it) = {
   let lang-code = none
   
-  if it == "arb" {
+  if it == "arb" or it == "apc" or it == "arz" {
     lang-code = "ar"
   } else if it == "cmn" {
     lang-code = "zh"
+  } else if it == "crh" {
+    lang-code = "tt"
   } else if it == "fas" {
     lang-code = "fa"
   } else if it == "fra" {
@@ -50,6 +52,8 @@
     lang-code = "ko"
   } else if it == "tur" {
     lang-code = "tr"
+  } else if it == "vie" {
+    lang-code = "vi"
   } else {
     panic("(to-lang) Unsupported language: " + str(it))
   }
@@ -129,7 +133,7 @@
     }
 
   } else if script == "kore" {
-    cfg.font = ("Noto serif")
+    cfg.font = ("Noto Serif KR")
     if scope == "section-title" {
       cfg.size = 15pt
     } else if scope == "section-body" {
